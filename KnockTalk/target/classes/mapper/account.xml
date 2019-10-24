@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="account">
+	<!-- select : 입력된 ID값이 있다면 그 ID를 반환 -->
+	<select id="selectOne_id" parameterType="String" resultType="com.project.knocktalk.vo.AccountVo">
+		select user_id from user_account where user_id = #{user_id}
+	</select>
+	
+	<!-- insert : 회원가입에 성공했다면 1, 실패했다면 0 반환 -->
+	<insert id="insert" parameterType="com.project.knocktalk.vo.AccountVo" useGeneratedKeys="false">
+		insert into user_account values(#{user_id}, #{user_password}, #{user_name}, #{user_nickname}, #{user_gender}, #{user_email}, #{user_birth}, #{user_phonenumber}, #{user_nationality}, #{user_address}, #{user_imagepath}, #{user_imagename}, 0, sysdate)
+	</insert>
+	
+	<!-- select : 회원 정보가 있다면 그 정보를 반환 -->
+	<select id="select_login" parameterType="String" resultType="com.project.knocktalk.vo.AccountVo">
+		select * from user_account where user_id = #{user_id}
+	</select>
+</mapper>
