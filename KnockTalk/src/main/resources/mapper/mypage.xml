@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypage">
+
+	<!-- select : 로그인 정보가 있다면 그 정보를 반환 -->
+	<select id="selectOne_mypage" resultType="com.project.knocktalk.vo.AccountVo">
+		select * from user_account where user_id = #{user_id}
+	</select>
+	
+	<!-- 이메일 조회 -->
+	<select id="selectOne_email" resultType="String" parameterType="String">
+		select user_email from user_account where user_id = #{user_id}
+	</select>
+	
+	<!-- 이메일 수정 -->
+	<update id="update_email" parameterType="com.project.knocktalk.vo.AccountVo">
+		update user_account set user_email = #{user_email} where user_id = #{user_id}
+	</update>
+	
+	
+	<!-- ::::::::::::::::::::::::::::::::::: my page modify :::::::::::::::::::::::::::::::::::::::::: -->
+ 	<!-- my_information_edit : 닉네임 , 이메일 수정-->
+	<update id="my_information_edit" parameterType="com.project.knocktalk.vo.AccountVo">
+		update user_account set user_nickname = #{user_nickname}, user_phonenumber = #{user_phonenumber}
+		where user_id = #{user_id}
+	</update>
+	
+	<!-- my_password_edit : 비밀번호 수정 -->
+	<update id="my_password_edit" parameterType="com.project.knocktalk.vo.AccountVo">
+		update user_account set user_password = #{user_password} where user_id = #{user_id}
+	</update>
+	
+	<!-- my_email_edit : 이메일 수정 -->
+	<update id = "my_email_edit" parameterType="com.project.knocktalk.vo.AccountVo">
+		update user_account set user_email = #{user_email} where user_id = #{user_id}
+	</update>
+	<!-- ::::::::::::::::::::::::::::::::::: my page modify :::::::::::::::::::::::::::::::::::::::::: -->
+	
+	<!-- 회원탈퇴 -->
+	<delete id="user_signout" parameterType="String">
+		delete from user_account where user_id = #{user_id}
+	</delete>
+</mapper>
